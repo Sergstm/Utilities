@@ -13,14 +13,15 @@ public class Main {
         orders.add(getHeating());
 //        orders.getOrders().forEach(System.out::println);
 
-        orders.volSort(SortParams.ASC);
-        orders.volSort(SortParams.DESC);
 
-        orders.dateSort(SortParams.ASC);
-        orders.dateSort(SortParams.DESC);
-//
-        orders.sumSort(SortParams.ASC);
-        orders.sumSort(SortParams.DESC);
+        orders.volSort(SortParameters.ASC);
+        orders.volSort(SortParameters.DESC);
+
+        orders.dateSort(SortParameters.ASC);
+        orders.dateSort(SortParameters.DESC);
+
+        orders.sumSort(SortParameters.ASC);
+        orders.sumSort(SortParameters.DESC);
 
         orders.getOrders().forEach(elem -> System.out.println("Date " + elem.getDate()
                 .format(DateTimeFormatter.ofPattern("y-MM-dd HH:mm:ss")) +

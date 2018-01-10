@@ -15,29 +15,29 @@ public class Orders {
         orders.add(order) ;
     }
 
-    public void volSort(SortParams parameter) {
-        if (parameter.compareTo(SortParams.ASC) == 0) {
+    public void volSort(SortParameters parameter) {
+        if (parameter.compareTo(SortParameters.ASC) == 0) {
             this.getOrders().sort(new VolComparator());
         }
-        if (parameter.compareTo(SortParams.DESC) == 0) {
+        if (parameter.compareTo(SortParameters.DESC) == 0) {
             this.getOrders().sort(new VolComparator().reversed());
         }
     }
 
-    public void dateSort(SortParams parameter) {
-        if (parameter.compareTo(SortParams.ASC) == 0) {
+    public void dateSort(SortParameters parameter) {
+        if (parameter.compareTo(SortParameters.ASC) == 0) {
             this.getOrders().sort(new DateComparator());
         }
-        if (parameter.compareTo(SortParams.DESC) == 0) {
+        if (parameter.compareTo(SortParameters.DESC) == 0) {
             this.getOrders().sort(new DateComparator().reversed());
         }
     }
 
-    public void sumSort(SortParams parameter) {
-        if (parameter.compareTo(SortParams.ASC) == 0) {
+    public void sumSort(SortParameters parameter) {
+        if (parameter.compareTo(SortParameters.ASC) == 0) {
             this.getOrders().sort(new SumComparator());
         }
-        if (parameter.compareTo(SortParams.DESC) == 0) {
+        if (parameter.compareTo(SortParameters.DESC) == 0) {
             this.getOrders().sort(new SumComparator().reversed());
         }
     }

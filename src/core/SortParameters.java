@@ -1,6 +1,6 @@
 package core;
 
-public enum SortParams {
+public enum SortParameters {
 
     ASC, DESC;
 }
