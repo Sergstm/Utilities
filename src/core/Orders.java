@@ -17,7 +17,7 @@ public class Orders {
 
     //SORTING
     public void volSort(SortParameters parameter) {
-        if (parameter.compareTo(SortParameters.ASC) == 0) {
+        if (parameter.equals(SortParameters.ASC)) {
             orders.sort(new VolComparator());
         } else {
             orders.sort(new VolComparator().reversed());
@@ -25,7 +25,7 @@ public class Orders {
     }
 
     public void dateSort(SortParameters parameter) {
-        if (parameter.compareTo(SortParameters.ASC) == 0) {
+        if (parameter.equals(SortParameters.ASC)) {
             orders.sort(new DateComparator());
         } else {
             orders.sort(new DateComparator().reversed());
@@ -33,7 +33,7 @@ public class Orders {
     }
 
     public void sumSort(SortParameters parameter) {
-        if (parameter.compareTo(SortParameters.ASC) == 0) {
+        if (parameter.equals(SortParameters.ASC)) {
             orders.sort(new SumComparator());
         } else {
             orders.sort(new SumComparator().reversed());
