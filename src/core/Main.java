@@ -2,6 +2,7 @@ package core;
 
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +13,6 @@ public class Main {
         orders.add(getElectricity());
         orders.add(getHeating());
 //        orders.getOrders().forEach(System.out::println);
-
 
         orders.volSort(SortParameters.ASC);
         orders.volSort(SortParameters.DESC);
@@ -26,6 +26,7 @@ public class Main {
         orders.getOrders().forEach(elem -> System.out.println("Date " + elem.getDate()
                 .format(DateTimeFormatter.ofPattern("y-MM-dd HH:mm:ss")) +
                 " Volume " + elem.getVolume() + " Sum " + elem.getSum()));
+
     }
 
     private static Service getHot() {

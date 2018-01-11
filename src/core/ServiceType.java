@@ -8,15 +8,14 @@ public class ServiceType implements Service {
     private BigDecimal prev;
     private BigDecimal pres;
     private VolumeCounter volumeCounter;
+    private BigDecimal tariff;
     private LocalDateTime date;
 
-    ServiceType(BigDecimal prev, BigDecimal pres) {
-        if (prev.signum() < 0 || pres.signum() < 0) {
-            throw new IllegalArgumentException("Negative values");
-        }
+    ServiceType(BigDecimal prev, BigDecimal pres, BigDecimal tariff) {
         this.prev = prev;
         this.pres = pres;
         this.volumeCounter = new VolumeCounter(prev, pres);
+        this.tariff = tariff;
         this.date = LocalDateTime.now();
     }
 
@@ -32,15 +31,17 @@ public class ServiceType implements Service {
 
     @Override
     public BigDecimal getSum() {
-        return null;
+        return tariff.multiply(getVolume())
+                .setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     @Override
     public String toString() {
-        return "EasyService{" +
+        return "ServiceType{" +
                 "prev=" + prev +
                 ", pres=" + pres +
                 ", volumeCounter=" + volumeCounter +
+                ", tariff=" + tariff +
                 ", date=" + date +
                 '}';
     }
