@@ -2,7 +2,6 @@ package core;
 
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
-import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
