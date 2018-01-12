@@ -1,6 +1,7 @@
 package core;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Main {
@@ -11,7 +12,6 @@ public class Main {
         orders.add(getCold());
         orders.add(getElectricity());
         orders.add(getHeating());
-//        orders.getOrders().forEach(System.out::println);
 
         orders.volSort(SortParameters.ASC);
         orders.volSort(SortParameters.DESC);
@@ -22,10 +22,18 @@ public class Main {
         orders.sumSort(SortParameters.ASC);
         orders.sumSort(SortParameters.DESC);
 
-        orders.getOrders().forEach(elem -> System.out.println("Date " + elem.getDate()
-                .format(DateTimeFormatter.ofPattern("y-MM-dd HH:mm:ss")) +
-                " Volume " + elem.getVolume() + " Sum " + elem.getSum()));
+        orders.volFilter(new BigDecimal("1"), new BigDecimal("300"));
+        LocalDateTime from = LocalDateTime.parse("2018-01-06");
+        LocalDateTime to = LocalDateTime.parse("2018-01-12");
+        orders.dateFilter(from, to);
+        orders.sumFilter(new BigDecimal("10"), new BigDecimal("100"));
 
+        orders.getOrders().stream()
+                .map(order -> "Date " + order.getDate()
+                        .format(DateTimeFormatter.ofPattern("y-MM-dd HH:mm:ss"))
+                        + "Volume" + order.getVolume()
+                        + "Sum " + order.getSum())
+                .forEach(System.out::println);
     }
 
     private static Service getHot() {

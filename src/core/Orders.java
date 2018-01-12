@@ -1,5 +1,7 @@
 package core;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,31 @@ public class Orders {
         } else {
             orders.sort(new SumComparator().reversed());
         }
+    }
+
+    //FILTERING
+    public void volFilter(BigDecimal from, BigDecimal to) {
+        orders.stream()
+                .filter(order -> order.getVolume().compareTo(from) > 0)
+                .filter(order -> order.getVolume().compareTo(to) < 0)
+                .map(Service::getVolume)
+                .forEach(System.out::println);
+    }
+
+    public void dateFilter(LocalDateTime from, LocalDateTime to) {
+        orders.stream()
+                .filter(order -> order.getDate().compareTo(from) > 0)
+                .filter(order -> order.getDate().compareTo(to) < 0)
+                .map(Service::getDate)
+                .forEach(System.out::println);
+    }
+
+    public void sumFilter(BigDecimal from, BigDecimal to) {
+        orders.stream()
+                .filter(order -> order.getSum().compareTo(from) > 0)
+                .filter(order -> order.getSum().compareTo(to) < 0)
+                .map(Service::getSum)
+                .forEach(System.out::println);
     }
 
     @Override
