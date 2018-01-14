@@ -13,21 +13,23 @@ public class Main {
         orders.add(getElectricity());
         orders.add(getHeating());
 
-        orders.volSort(SortParameters.ASC);
-        orders.volSort(SortParameters.DESC);
+        //Sort
+//        orders.volSort(SortParameters.ASC);
+//        orders.volSort(SortParameters.DESC);
+//
+//        orders.dateSort(SortParameters.ASC);
+//        orders.dateSort(SortParameters.DESC);
+//
+//        orders.sumSort(SortParameters.ASC);
+//        orders.sumSort(SortParameters.DESC);
 
-        orders.dateSort(SortParameters.ASC);
-        orders.dateSort(SortParameters.DESC);
+        //Filter
+//        orders.volFilter(new BigDecimal("1"), new BigDecimal("300"));
+        orders.dateFilter(LocalDateTime.parse("20180106"),
+                LocalDateTime.parse("20180112"));
+//        orders.sumFilter(new BigDecimal("10"), new BigDecimal("100"));
 
-        orders.sumSort(SortParameters.ASC);
-        orders.sumSort(SortParameters.DESC);
-
-        orders.volFilter(new BigDecimal("1"), new BigDecimal("300"));
-        LocalDateTime from = LocalDateTime.parse("2018-01-06");
-        LocalDateTime to = LocalDateTime.parse("2018-01-12");
-        orders.dateFilter(from, to);
-        orders.sumFilter(new BigDecimal("10"), new BigDecimal("100"));
-
+        //Out
         orders.getOrders().stream()
                 .map(order -> "Date " + order.getDate()
                         .format(DateTimeFormatter.ofPattern("y-MM-dd HH:mm:ss"))
