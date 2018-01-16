@@ -52,7 +52,7 @@ public class Orders {
         return orders.stream()
                 .filter(order -> order.getVolume().compareTo(fromVol) > 0)
                 .filter(order -> order.getVolume().compareTo(toVol) < 0)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public List<Service> dateFilter(String from, String to) {
@@ -61,7 +61,8 @@ public class Orders {
         return orders.stream()
                 .filter(order -> order.getDate().compareTo(fromDate) > 0)
                 .filter(order -> order.getDate().compareTo(toDate) < 0)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(ArrayList::new));
+
     }
 
     public List<Service> sumFilter(String from, String to) {
@@ -70,7 +71,7 @@ public class Orders {
         return orders.stream()
                 .filter(order -> order.getSum().compareTo(fromSum) > 0)
                 .filter(order -> order.getSum().compareTo(toSum) < 0)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override
