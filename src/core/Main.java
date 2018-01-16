@@ -1,8 +1,8 @@
 package core;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,26 +16,31 @@ public class Main {
         //Sort
 //        orders.volSort(SortParameters.ASC);
 //        orders.volSort(SortParameters.DESC);
-//
+
 //        orders.dateSort(SortParameters.ASC);
-//        orders.dateSort(SortParameters.DESC);
-//
+        orders.dateSort(SortParameters.DESC);   //Default sort
+
 //        orders.sumSort(SortParameters.ASC);
 //        orders.sumSort(SortParameters.DESC);
 
         //Filter
-//        orders.volFilter(new BigDecimal("1"), new BigDecimal("300"));
-        orders.dateFilter(LocalDateTime.parse("20180106"),
-                LocalDateTime.parse("20180112"));
-//        orders.sumFilter(new BigDecimal("10"), new BigDecimal("100"));
+//        List<Service> filtering = orders.volFilter("1", "10");
+//        List<Service> filtering = orders.dateFilter("2018-01-06", "2018-01-16");
+//        List<Service> filtering = orders.sumFilter("10", "100");
+
+        List<Service> filtering = orders.getOrders();   //Default filter
 
         //Out
-        orders.getOrders().stream()
-                .map(order -> "Date " + order.getDate()
-                        .format(DateTimeFormatter.ofPattern("y-MM-dd HH:mm:ss"))
-                        + "Volume" + order.getVolume()
-                        + "Sum " + order.getSum())
+        filtering.stream()
+                .map(Main::printOrders)
                 .forEach(System.out::println);
+    }
+
+    private static String printOrders(Service service) {
+        return "Date: " + service.getDate()
+                .format(DateTimeFormatter.ofPattern("y-MM-dd HH:mm:ss"))
+                + "\tVolume= " + service.getVolume()
+                + "\tSum= " + service.getSum();
     }
 
     private static Service getHot() {

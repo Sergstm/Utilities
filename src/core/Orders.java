@@ -1,9 +1,12 @@
 package core;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Orders {
 
@@ -43,28 +46,31 @@ public class Orders {
     }
 
     //FILTERING
-    public void volFilter(BigDecimal from, BigDecimal to) {
-        orders.stream()
-                .filter(order -> order.getVolume().compareTo(from) > 0)
-                .filter(order -> order.getVolume().compareTo(to) < 0)
-                .map(Service::getVolume)
-                .forEach(System.out::println);
+    public List<Service> volFilter(String from, String to) {
+        BigDecimal fromVol = new BigDecimal(from);
+        BigDecimal toVol = new BigDecimal(to);
+        return orders.stream()
+                .filter(order -> order.getVolume().compareTo(fromVol) > 0)
+                .filter(order -> order.getVolume().compareTo(toVol) < 0)
+                .collect(Collectors.toList());
     }
 
-    public void dateFilter(LocalDateTime from, LocalDateTime to) {
-        orders.stream()
-                .filter(order -> order.getDate().compareTo(from) > 0)
-                .filter(order -> order.getDate().compareTo(to) < 0)
-                .map(Service::getDate)
-                .forEach(System.out::println);
+    public List<Service> dateFilter(String from, String to) {
+        LocalDateTime fromDate = LocalDateTime.parse(from.concat("T00:00:00"));
+        LocalDateTime toDate = LocalDateTime.parse(to.concat("T23:59:59"));
+        return orders.stream()
+                .filter(order -> order.getDate().compareTo(fromDate) > 0)
+                .filter(order -> order.getDate().compareTo(toDate) < 0)
+                .collect(Collectors.toList());
     }
 
-    public void sumFilter(BigDecimal from, BigDecimal to) {
-        orders.stream()
-                .filter(order -> order.getSum().compareTo(from) > 0)
-                .filter(order -> order.getSum().compareTo(to) < 0)
-                .map(Service::getSum)
-                .forEach(System.out::println);
+    public List<Service> sumFilter(String from, String to) {
+        BigDecimal fromSum = new BigDecimal(from);
+        BigDecimal toSum = new BigDecimal(to);
+        return orders.stream()
+                .filter(order -> order.getSum().compareTo(fromSum) > 0)
+                .filter(order -> order.getSum().compareTo(toSum) < 0)
+                .collect(Collectors.toList());
     }
 
     @Override
