@@ -1,10 +1,9 @@
 package core;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,25 +22,25 @@ public class Orders {
     //SORTING
     public void volSort(SortParameters parameter) {
         if (parameter.equals(SortParameters.ASC)) {
-            orders.sort(new VolComparator());
+            orders.sort(Comparator.comparing(Service::getVolume));
         } else {
-            orders.sort(new VolComparator().reversed());
+            orders.sort(Comparator.comparing(Service::getVolume).reversed());
         }
     }
 
     public void dateSort(SortParameters parameter) {
         if (parameter.equals(SortParameters.ASC)) {
-            orders.sort(new DateComparator());
+            orders.sort(Comparator.comparing(Service::getDate));
         } else {
-            orders.sort(new DateComparator().reversed());
+            orders.sort(Comparator.comparing(Service::getDate).reversed());
         }
     }
 
     public void sumSort(SortParameters parameter) {
         if (parameter.equals(SortParameters.ASC)) {
-            orders.sort(new SumComparator());
+            orders.sort(Comparator.comparing(Service::getSum));
         } else {
-            orders.sort(new SumComparator().reversed());
+            orders.sort(Comparator.comparing(Service::getSum).reversed());
         }
     }
 
