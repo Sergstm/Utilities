@@ -7,30 +7,35 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        Orders orders = new Orders();
-        orders.add(getHot());
-        orders.add(getCold());
-        orders.add(getElectricity());
-        orders.add(getHeating());
+        DataTransfer transfer = new DataTransfer();
+        //GET DATA
+        List<String> dataList = transfer.getData();
 
-        //Sort
+        Orders orders = new Orders();
+        //CREATE ORDERS
+        orders.add(getHot(dataList));
+        orders.add(getCold(dataList));
+        orders.add(getElectricity(dataList));
+        orders.add(getHeating(dataList));
+
+        //SEND DATA
+//        transfer.writeData(orders.getOrders(), false);
+
+        //SORT
 //        orders.volSort(SortParameters.ASC);
 //        orders.volSort(SortParameters.DESC);
-
 //        orders.dateSort(SortParameters.ASC);
         orders.dateSort(SortParameters.DESC);   //Default sort
-
 //        orders.sumSort(SortParameters.ASC);
 //        orders.sumSort(SortParameters.DESC);
 
-        //Filter
+        //FILTER
 //        List<Service> filtering = orders.volFilter("1", "10");
-//        List<Service> filtering = orders.dateFilter("2018-01-06", "2018-01-16");
+//        List<Service> filtering = orders.dateFilter("2018-01-06", "2018-01-18");
 //        List<Service> filtering = orders.sumFilter("10", "100");
-
         List<Service> filtering = orders.getOrders();   //Default filter
 
-        //Out
+        //OUT
         filtering.stream()
                 .map(Main::printOrders)
                 .forEach(System.out::println);
@@ -43,32 +48,49 @@ public class Main {
                 + "\tSum= " + service.getSum();
     }
 
-    private static Service getHot() {
-        BigDecimal prev = new BigDecimal("10");
-        BigDecimal pres = new BigDecimal("15");
-        BigDecimal tariffIn = new BigDecimal("84.45");
+    private static Service getHot(List<String > data) {
+        String[] vol = data.get(0).split("---");
+        String preview = vol[1];
+        String present = vol[2];
+        String tariff = vol[3];
+        BigDecimal prev = new BigDecimal(preview);
+        BigDecimal pres = new BigDecimal(present);
+        BigDecimal tariffIn = new BigDecimal(tariff);
         return new EasyService(prev, pres, tariffIn);
     }
 
-    private static Service getCold() {
-        BigDecimal prev = new BigDecimal("10");
-        BigDecimal pres = new BigDecimal("18");
-        BigDecimal tariffIn = new BigDecimal("8.436");
+    private static Service getCold(List<String > data) {
+        String[] vol = data.get(1).split("---");
+        String preview = vol[1];
+        String present = vol[2];
+        String tariff = vol[3];
+        BigDecimal prev = new BigDecimal(preview);
+        BigDecimal pres = new BigDecimal(present);
+        BigDecimal tariffIn = new BigDecimal(tariff);
         return new EasyService(prev, pres, tariffIn);
     }
 
-    private static Service getElectricity() {
-        BigDecimal prev = new BigDecimal("150");
-        BigDecimal pres = new BigDecimal("251");
-        BigDecimal tariff1 = new BigDecimal("0.9");
-        BigDecimal tariff2 = new BigDecimal("1.68");
+    private static Service getElectricity(List<String > data) {
+        String[] vol = data.get(2).split("---");
+        String preview = vol[1];
+        String present = vol[2];
+        String tar1 = vol[3];
+        String tar2 = vol[4];
+        BigDecimal prev = new BigDecimal(preview);
+        BigDecimal pres = new BigDecimal(present);
+        BigDecimal tariff1 = new BigDecimal(tar1);
+        BigDecimal tariff2 = new BigDecimal(tar2);
         return new HardService(prev, pres, tariff1, tariff2);
     }
 
-    private static Service getHeating() {
-        BigDecimal prev = new BigDecimal("0");
-        BigDecimal pres = new BigDecimal("0.8");
-        BigDecimal tariffIn = new BigDecimal("1414.45");
+    private static Service getHeating(List<String > data) {
+        String[] vol = data.get(3).split("---");
+        String preview = vol[1];
+        String present = vol[2];
+        String tariff = vol[3];
+        BigDecimal prev = new BigDecimal(preview);
+        BigDecimal pres = new BigDecimal(present);
+        BigDecimal tariffIn = new BigDecimal(tariff);
         return new EasyService(prev, pres, tariffIn);
     }
 }
