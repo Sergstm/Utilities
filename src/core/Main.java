@@ -21,6 +21,12 @@ public class Main {
         //SEND DATA
 //        transfer.writeData(orders.getOrders(), false);
 
+        //SERIALIZE DATA
+//        transfer.serialData(toSerialVolume());
+
+        //DESERIALIZE DATA
+//        transfer.deserializeData();
+
         //SORT
 //        orders.volSort(SortParameters.ASC);
 //        orders.volSort(SortParameters.DESC);
@@ -46,6 +52,11 @@ public class Main {
                 .format(DateTimeFormatter.ofPattern("y-MM-dd HH:mm:ss"))
                 + "\tVolume= " + service.getVolume()
                 + "\tSum= " + service.getSum();
+    }
+
+    private static VolumeCounter toSerialVolume() {
+        return new VolumeCounter(new BigDecimal(5),
+                new BigDecimal(10));
     }
 
     private static Service getHot(List<String > data) {

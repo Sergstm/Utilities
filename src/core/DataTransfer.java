@@ -35,4 +35,32 @@ public class DataTransfer {
 
     }
 
+    public void serialData(VolumeCounter vol) {
+        String path = "src/core/dataOut.txt";
+        File file = new File(path);
+
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))) {
+            outputStream.writeObject(vol);
+            System.out.println("Serialize Success");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deserializeData() {
+        String path = "src/core/dataOut.txt";
+        File file = new File(path);
+
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
+            System.out.println(inputStream.readObject());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
 }

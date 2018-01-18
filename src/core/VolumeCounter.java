@@ -1,8 +1,11 @@
 package core;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class VolumeCounter {
+public class VolumeCounter implements Serializable {
+
+    static final long serialVersionUID = 573;
 
     private BigDecimal previousValue;
     private BigDecimal presentValue;
