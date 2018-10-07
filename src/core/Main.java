@@ -11,8 +11,8 @@ public class Main {
         //GET DATA
         List<String> dataList = transfer.getData();
 
-        Orders orders = new Orders();
         //CREATE ORDERS
+        Orders orders = new Orders();
         orders.add(getHot(dataList));
         orders.add(getCold(dataList));
         orders.add(getElectricity(dataList));
